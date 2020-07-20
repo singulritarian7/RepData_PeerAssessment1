@@ -26,7 +26,7 @@ tot.steps.perday <- activity %>% group_by(date) %>% summarize(stepsperday = sum(
 qplot(stepsperday, data = tot.steps.perday,xlab="Total steps per day", ylab ="Frequency", main = "Histogram of the total number of steps taken each day", binwidth = 500)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
+![](PA1_template_files/figure-html/plot1-1.png)<!-- -->
 
 ```r
 summary <- tot.steps.perday %>% summarize(average = mean(stepsperday, na.rm = TRUE), median = median(stepsperday, na.rm = TRUE))
@@ -49,7 +49,7 @@ daily_pattern <- activity %>% group_by(interval) %>% summarize(average = mean(st
 qplot(interval, average, data = daily_pattern,geom = "line", xlab="5-minute intervals", ylab= "Average number of steps taken across all days")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![](PA1_template_files/figure-html/plot2-1.png)<!-- -->
 
 Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -95,7 +95,7 @@ imputedsteps <- tapply(imputed$steps,imputed$date, sum)
 qplot(imputedsteps, xlab= "Total steps per day" , binwidth = 500, ylab = "Frequency",main = "Histogram of total number of steps taken each day" )
 ```
 
-![](PA1_template_files/figure-html/histogram-1.png)<!-- -->
+![](PA1_template_files/figure-html/plot3-1.png)<!-- -->
 
 ##### 1. Calculate and report the mean and median total number of steps taken per day.
 
@@ -139,6 +139,6 @@ ggplot(averageimputed, aes(interval, steps)) +
     ylab("Avarage number of steps")
 ```
 
-![](PA1_template_files/figure-html/timeseries-1.png)<!-- -->
+![](PA1_template_files/figure-html/plot4-1.png)<!-- -->
 
 

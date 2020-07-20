@@ -18,7 +18,7 @@ activity <- read.csv("activity.csv")
 
 ## What is mean total number of steps taken per day?
 
-```{r, echo=TRUE, warning=FALSE, message=FALSE}
+```{r plot1, echo=TRUE, warning=FALSE, message=FALSE}
 library(dplyr)
 library(ggplot2)
 tot.steps.perday <- activity %>% group_by(date) %>% summarize(stepsperday = sum(steps,na.rm = TRUE ))
@@ -28,7 +28,7 @@ summary
 ```
 
 ## What is the average daily activity pattern?
-```{r, echo=TRUE,warning=FALSE, message=FALSE }
+```{r plot2, echo=TRUE,warning=FALSE, message=FALSE }
 library(dplyr)
 library(ggplot2)
 daily_pattern <- activity %>% group_by(interval) %>% summarize(average = mean(steps,na.rm = TRUE ))
@@ -59,7 +59,7 @@ imputed$steps <- impute(activity$steps, fun = mean)
 ```    
 
 ## Histogram of the total number of steps taken each day 
-```{r histogram, echo=TRUE}
+```{r plot3, echo=TRUE}
 imputedsteps <- tapply(imputed$steps,imputed$date, sum)
 qplot(imputedsteps, xlab= "Total steps per day" , binwidth = 500, ylab = "Frequency",main = "Histogram of total number of steps taken each day" )
 ```
@@ -82,7 +82,7 @@ imputed$datefactor <-  ifelse(as.POSIXlt(imputed$date)$wday %in% c(0,6), 'weeken
 
 ##### 2. Make a panel plot containing a time series plot (i.e. type=“l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
 
-```{r timeseries, echo=TRUE}
+```{r plot4, echo=TRUE}
 averageimputed <- aggregate(steps ~ interval + datefactor, data=imputed, "mean")
 
 ggplot(averageimputed, aes(interval, steps)) + 
